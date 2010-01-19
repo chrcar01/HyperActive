@@ -1,0 +1,48 @@
+<project name="HyperActive" default="build">
+	<target name="build">
+		<delete dir="./bin" if="${directory::exists('bin')}"></delete>
+		<mkdir dir="bin"></mkdir>
+		<csc
+			target="library"
+			output="bin/HyperActive.dll"
+			warninglevel="4"
+			optimize="false" 
+			warnaserror="false" 
+			debug="true">
+			<references>
+				<include name="dependencies/System.Data.SqlServerCe.dll" />
+			</references>
+			<sources>
+				<include name="AssemblyInfo.cs" />
+				<include name="HyperActive.SchemaProber/**/*.cs" />
+				<include name="HyperActive.Dominator/**/*.cs" />
+				<include name="HyperActive.Core/**/*.cs" />
+			</sources>
+			<resources prefix="HyperActive.Core" basedir="./HyperActive.Core">
+				<include name="hyperactive.config" />
+			</resources>
+		</csc>
+		<csc
+			target="exe"
+			output="bin/hactivate.exe"
+			warninglevel="4"
+			optimize="false" 
+			debug="true">
+			<sources>
+				<include name="AssemblyInfo.cs" />
+				<include name="HyperActive.ConsoleUI/**/*.cs" />
+			</sources>
+			<references>
+				<include name="bin/HyperActive.dll" />
+			</references>
+		</csc>
+		
+	</target>
+	<target name="copy">
+		<copy todir="${to}">
+			<fileset basedir="bin">				
+				<include name="*.*" />
+			</fileset>
+		</copy>
+	</target>
+</project>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="HyperActive.Dominator.AttributeDeclaration" Collapsed="true">
+    <Position X="3.5" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>AttributeDeclaration.cs</FileName>
+      <HashCode>AAAAAAAAIAAIAAAAAACAAAAAAQAAAAAAQAAAAAIBAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HyperActive.Dominator.ClassDeclaration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ClassDeclaration.cs</FileName>
+      <HashCode>AAQAIAAAABAAEIQDAACAAAQCAABAIAAoAQBAAQKCGAE=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.CodeBuilder" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>CodeBuilder.cs</FileName>
+      <HashCode>AIAAAAAAAAAAAAAIAAAAAAAACAQAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HyperActive.Dominator.CodeDomTypeReference" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>CodeDomTypeReference.cs</FileName>
+      <HashCode>AAAgACAAAABAAAQFAAAAAAAAAAAABAAAAAAAAAIAIAE=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.FieldDeclaration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>FieldDeclaration.cs</FileName>
+      <HashCode>AAAAIAAAACAAAQAAAAAAAAQAAAAAAAAAAAAAAAIBAIA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.LineDeclaration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <FileName>LineDeclaration.cs</FileName>
+      <HashCode>EAAAAAAACAAAAiAAAAEAAAAAMAIIAAAAAAAAQQIAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.MethodDeclaration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>MethodDeclaration.cs</FileName>
+      <HashCode>AAAIYQQAAAAAAAICBAAAAAAACAAAAAAAAABAAAIAQAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.NamespaceDeclaration" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>NamespaceDeclaration.cs</FileName>
+      <HashCode>AAAAIAAAAAAAAAAAAABEAAQAABAAQAAAAAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HyperActive.Dominator.PropertyDeclaration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>PropertyDeclaration.cs</FileName>
+      <HashCode>gAAAIAAAIAAAAAACAAAAAAQUAAAAAAAAAgBAAAIBgAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HyperActive.Dominator.PropertyDeclarationList" Collapsed="true">
+    <Position X="2.25" Y="2" Width="2" />
+    <TypeIdentifier>
+      <FileName>PropertyDeclarationList.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="HyperActive.Dominator.ICodeDom&lt;T&gt;" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ICodeDom.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="HyperActive.Dominator.LineTypes" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>LineDeclaration.cs</FileName>
+      <HashCode>AAAAQAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

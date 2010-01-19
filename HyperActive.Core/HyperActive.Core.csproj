@@ -1,0 +1,119 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{76DB8DAF-7CFD-4F08-BDFF-9DBF313B660F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HyperActive.Core</RootNamespace>
+    <AssemblyName>HyperActive.Core</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AwishModelGenerator.cs" />
+    <Compile Include="Config\ComponentDescriptor.cs" />
+    <Compile Include="Config\ConstructorParameterDescriptor.cs" />
+    <Compile Include="Config\DefaultConfigParser.cs" />
+    <Compile Include="Config\DefaultConfigurationOptions.cs" />
+    <Compile Include="Config\IConfigParser.cs" />
+    <Compile Include="Config\IConfigurationOptions.cs" />
+    <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="Container\CtorParameter.cs" />
+    <Compile Include="Container\Ioc.cs" />
+    <Compile Include="Container\ServiceDetails.cs" />
+    <Compile Include="Container\XmlConfigParser.cs" />
+    <Compile Include="Generators\ActiveRecordGenerator.cs" />
+    <Compile Include="Generators\ActiveRecordTestGenerator.cs" />
+    <Compile Include="Config\Arguments.cs" />
+    <Compile Include="Generators\BasicActiveRecordGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generators\CodeRunnerConfig.cs" />
+    <Compile Include="Generators\CodeRunnerImpl.cs" />
+    <Compile Include="Generators\ConfigurableActiveRecordGenerator.cs" />
+    <Compile Include="Generators\EnumDescriptor.cs" />
+    <Compile Include="Generators\EnumGenerator.cs" />
+    <Compile Include="Generators\GeneratorOptionsImpl.cs" />
+    <Compile Include="Generators\ICodeRunner.cs" />
+    <Compile Include="Generators\IGeneratorOptions.cs" />
+    <Compile Include="Generators\LazyActiveRecordGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generators\SimpleActiveRecordGenerator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HyperActiveException.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Inflector.cs" />
+    <Compile Include="IValueProvider.cs" />
+    <Compile Include="NameProvider.cs" />
+    <Compile Include="Try.cs" />
+    <Compile Include="TypeCreator.cs" />
+    <Compile Include="TypeInferer.cs" />
+    <Compile Include="ValueProviderImpl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HyperActive.Dominator\HyperActive.Dominator.csproj">
+      <Project>{1027DE52-482F-487A-BC61-09480B86B5BD}</Project>
+      <Name>HyperActive.Dominator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HyperActive.SchemaProber\HyperActive.SchemaProber.csproj">
+      <Project>{1B4D0691-EFD8-4CCB-8AFD-B0A9BD371E69}</Project>
+      <Name>HyperActive.SchemaProber</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="hyperactive.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,557 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HtmlBuilder</name>
+    </assembly>
+    <members>
+        <member name="T:HtmlBuilder.Element">
+            <summary>
+            Represents a simple html element.
+            </summary>
+        </member>
+        <member name="T:HtmlBuilder.RenderableComponent">
+            <summary>
+            This is the base class for any class that wants to render itself as HtmlBuilder.  
+            </summary>
+        </member>
+        <member name="T:HtmlBuilder.IRender">
+            <summary>
+            Defines a contract for any implementor that can render itself to a
+            TextWriter and/or Stream.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.IRender.Render(System.IO.TextWriter)">
+            <summary>
+            Renders the specified text.
+            </summary>
+            <param name="text">The text.</param>
+        </member>
+        <member name="M:HtmlBuilder.IRender.Render(System.IO.Stream)">
+            <summary>
+            Renders the specified stream.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:HtmlBuilder.IRender.Render(System.Xml.XmlWriter)">
+            <summary>
+            Renders the specified XML.
+            </summary>
+            <param name="xml">The XML.</param>
+        </member>
+        <member name="M:HtmlBuilder.IRender.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the specified HtmlBuilder.
+            </summary>
+            <param name="html">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.Render(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the specified writer.
+            </summary>
+            <param name="writer">The writer.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the specified HtmlBuilder.
+            </summary>
+            <param name="html">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.Render(System.Xml.XmlWriter)">
+            <summary>
+            Renders the specified XML writer.
+            </summary>
+            <param name="xmlWriter">The XML writer.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.Render(System.IO.TextWriter)">
+            <summary>
+            Renders the html to the TextWriter instance.
+            </summary>
+            <param name="writer">The TextWriter instance to which the html is written.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.Render(System.IO.Stream)">
+            <summary>
+            Renders the html to the Stream instance.
+            </summary>
+            <param name="stream">The Stream to which the html is written.</param>
+        </member>
+        <member name="M:HtmlBuilder.RenderableComponent.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.  Internally, this 
+            creates a StringWriter, calls the Render(TextWriter writer) method and returns the result.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.Element"/> class.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.Element.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.Element"/> class.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+            <example>
+            	string expected = "<span>Hello</span>";
+            	string actual =
+            		new Element("span")
+            			.Update("Hello")).ToString();
+            	Assert.AreEqual(expected, actual);
+            </example>
+        </member>
+        <member name="M:HtmlBuilder.Element.#ctor(System.String,HtmlBuilder.Element[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.Element"/> class.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+            <param name="childElements">The child elements.</param>
+            <example>
+            	string expected = "<span><b>Hello</b></span>";
+            	string actual =
+            		new Element("span",
+            			new Element("b")
+            				.Update("Hello")).ToString();
+            	Assert.AreEqual(expected, actual);
+            </example>
+        </member>
+        <member name="M:HtmlBuilder.Element.#ctor(System.String,System.String,HtmlBuilder.Element[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.Element"/> class.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+            <param name="nameValuePairsSeparatedByAnEqualsSign">The name value pair separated by an 
+            equals sign. eg: height=520px;width=100%;border=0;</param>
+            <param name="childElements">The child elements.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.HasAttribute(System.String)">
+            <summary>
+            Determines whether the specified name has attribute.
+            </summary>
+            <param name="attributeName">The name of the attribute to test.</param>
+            <returns>
+            	<c>true</c> if the specified name has attribute; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.RenderAttributes(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the attributes.
+            </summary>
+            <param name="writer">The writer.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.RenderStartTag(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the start tag.
+            </summary>
+            <param name="writer">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.RenderChildren(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the children.
+            </summary>
+            <param name="writer">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.RenderEndTag(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the end tag.
+            </summary>
+            <param name="writer">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.RenderContent(HtmlBuilder.IWriter)">
+            <summary>
+            Renders the content.
+            </summary>
+            <param name="html">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.Element.Render(HtmlBuilder.IWriter)">
+            <summary>
+            Renders this element to the html writer.
+            </summary>
+            <param name="writer">The html writer this element and it's children are rendered.</param>
+            <example>
+            	string expected = @"<span>Hello World</span>";
+            	string actual = "";
+            	using (StringWriter writer = new StringWriter())
+            	using (HtmlTextWriter html = new HtmlTextWriter(writer))
+                {
+                	new Element("span")
+            			.Update("Hello World")
+            			.Render(html);
+            		actual = writer.ToString();
+                }
+            	Assert.AreEqual(expected, actual);
+            </example>
+        </member>
+        <member name="M:HtmlBuilder.Element.Update(System.String)">
+            <summary>
+            Replaces the content of this element with innerHtml
+            </summary>
+            <param name="innerHtml">The content to set as the inner html of this element.</param>
+            <returns>This element with it's content updated to the specified HtmlBuilder.</returns>
+            <example>
+            string expected = @"<span>Hello World</span>";
+            string actual = new Element("span").Update("Hello World").ToString();
+            Assert.AreEqual(expected, actual);
+            </example>
+        </member>
+        <member name="M:HtmlBuilder.Element.Update(System.String,System.Object[])">
+            <summary>
+            Replaces the content of this element with innerHtml
+            </summary>
+            <param name="innerHtmlFormat">The inner HTML format.</param>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.Insert(HtmlBuilder.Element[])">
+            <summary>
+            Inserts the elements at index zero and returns the updated element.
+            </summary>
+            <param name="childElements">The child elements to insert.</param>
+            <returns>The current instance with the inserted elements</returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.Insert(System.Int32,HtmlBuilder.Element[])">
+            <summary>
+            Inserts the elements at the specified index and returns the updated
+            element.
+            </summary>
+            <param name="index">The index where the elements are inserted.</param>
+            <param name="childElements">The child elements to insert.</param>
+            <returns>The current instance with the inserted elements</returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.AddAttribute(System.String)">
+            <summary>
+            Adds the specified name value pair separated by an equals sign.
+            </summary>
+            <param name="nameValuePairsSeparatedByAnEqualsSign">The name value pair separated by an 
+            equals sign. eg: class=required;width=100%;border=0;</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.AddAttribute(System.String,System.String,System.Object[])">
+            <summary>
+            Adds the specified attribute name.
+            </summary>
+            <param name="attributeName">Name of the attribute.</param>
+            <param name="format">The attribute value.</param>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.AddAttribute(System.String,System.String)">
+            <summary>
+            Adds the specified attribute and corresponding value to the element.
+            </summary>
+            <param name="name">The name of the attribute.</param>
+            <param name="value">The value of the attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.RemoveAttribute(System.String)">
+            <summary>
+            Removes the specified attribute.
+            </summary>
+            <param name="attributeName">Name of the attribute to remove.</param>
+            <returns>The element with the attribute removed.</returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.op_Implicit(HtmlBuilder.Element)~System.String">
+            <summary>
+            Performs an implicit conversion from <see cref="T:HtmlBuilder.Element"/> to <see cref="T:System.String"/>.
+            </summary>
+            <param name="element">The element.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.Append(HtmlBuilder.Element[])">
+            <summary>
+            Appends the specified child elements.
+            </summary>
+            <param name="childElements">The child elements.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.AddStyle(System.String)">
+            <summary>
+            Adds the style.
+            </summary>
+            <param name="nameValuePairsSeparatedBySemiColons">The name value pairs separated by semi colons.</param>
+            <returns></returns>
+        </member>
+        <member name="M:HtmlBuilder.Element.AddCssClasses(System.String)">
+            <summary>
+            Adds the CSS classes.
+            </summary>
+            <param name="cssClassNamesSeparatedBySpaces">The CSS class names separated by spaces. For example, yourElement.AddCssClasses("required dataentry") will
+            produce &lt;yourElement class="required dataentry"&gt;&lt;/yourElement&gt;.</param>
+            <returns>The current instance with the added css class.</returns>
+        </member>
+        <member name="P:HtmlBuilder.Element.Item(System.String)">
+            <summary>
+            Gets or sets the attribute name.  If the attribute does not exist it
+            is added, otherwise it is updated.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:HtmlBuilder.Element.TagName">
+            <summary>
+            Gets the name of the tag.  This can only be set in the ctor.
+            </summary>
+            <value>The name of the tag.</value>
+        </member>
+        <member name="P:HtmlBuilder.Element.Children">
+            <summary>
+            Gets the child elements.
+            </summary>
+            <value>The child elements.</value>
+        </member>
+        <member name="P:HtmlBuilder.Element.InnerHtml">
+            <summary>
+            Gets or sets the inner HTML of the element.
+            </summary>
+            <value>The inner HTML of the element.</value>
+        </member>
+        <member name="P:HtmlBuilder.Element.Attributes">
+            <summary>
+            Gets the attributes for the element.  This returns a readonly collection.
+            </summary>
+        </member>
+        <member name="P:HtmlBuilder.Element.Styles">
+            <summary>
+            Gets the css styles.
+            </summary>
+            <value>The styles.</value>
+        </member>
+        <member name="P:HtmlBuilder.Element.CssClasses">
+            <summary>
+            Gets or sets the CSS classes.
+            </summary>
+            <value>The CSS classes.</value>
+        </member>
+        <member name="T:HtmlBuilder.ElementList">
+            <summary>
+            List of elements.  This can be used to render a list of sibling elements.  For example,
+            String blah = new ElementList(new Element("p").Update("test"), new Element("b").Update("poop"))
+            would render <p>test</p><b>poop</b>
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.#ctor(HtmlBuilder.Element[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.ElementList"/> class.
+            </summary>
+            <param name="elements">The sibling elements.</param>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the specified HtmlBuilder.
+            </summary>
+            <param name="html">The HtmlBuilder.</param>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.Render(System.Xml.XmlWriter)">
+            <summary>
+            Renders the specified XML.
+            </summary>
+            <param name="xml">The XML.</param>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.Render(System.IO.TextWriter)">
+            <summary>
+            Renders the html to the TextWriter instance.  The Render(TextWriter) method
+            will use an HtmlTextWriter instance to ultimately perform the rendering.
+            </summary>
+            <param name="writer">The TextWriter instance to which the html is written.</param>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.Render(System.IO.Stream)">
+            <summary>
+            Renders the html to the Stream instance.
+            </summary>
+            <param name="stream">The Stream to which the html is written.</param>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.  Internally, this 
+            creates a StringWriter, calls the Render(TextWriter writer) method and returns the result.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:HtmlBuilder.ElementList.op_Implicit(HtmlBuilder.ElementList)~System.String">
+            <summary>
+            Performs an implicit conversion from <see cref="T:HtmlBuilder.ElementList"/> to <see cref="T:System.String"/>.
+            </summary>
+            <param name="elements">The elements.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="T:HtmlBuilder.HtmlTextWriterWrapper">
+            <summary>
+            This class wraps a <see cref="T:System.Web.UI.HtmlTextWriter"/> behind the <see cref="T:HtmlBuilder.IWriter"/> interface.
+            </summary>
+        </member>
+        <member name="T:HtmlBuilder.IWriter">
+            <summary>
+            Identifies methods used by the rendering system
+            for writing data to streams.  This was created strictly due
+            to the differences between an XmlTextWriter and the other
+            flavor of TextWriters like the StringWriter and HtmlTextWriter.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.Write(System.String)">
+            <summary>
+            Writes the specified s.
+            </summary>
+            <param name="s">The s.</param>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.WriteEndTag(System.String)">
+            <summary>
+            Writes the end tag.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.WriteBeginTag(System.String)">
+            <summary>
+            Writes the begin tag.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.WriteAttribute(System.String,System.String)">
+            <summary>
+            Writes the attribute.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.Write(System.Char)">
+            <summary>
+            Writes the specified c.
+            </summary>
+            <param name="c">The c.</param>
+        </member>
+        <member name="M:HtmlBuilder.IWriter.CloseTag">
+            <summary>
+            Closes the tag.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.#ctor(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.HtmlTextWriterWrapper"/> class.
+            </summary>
+            <param name="html">The HtmlTextWriter that will be doing the work.</param>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.CloseTag">
+            <summary>
+            Closes a tag.  Writes an <see cref="F:System.Web.UI.HtmlTextWriter.TagRightChar"/> to the stream.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.Write(System.String)">
+            <summary>
+            Writes a string to the underlying HtmlTextWriter.
+            </summary>
+            <param name="s">The string to render.</param>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.WriteEndTag(System.String)">
+            <summary>
+            Writes an end tag.
+            </summary>
+            <param name="tagName">Name of the end tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.WriteAttribute(System.String,System.String)">
+            <summary>
+            Writes an attribute.
+            </summary>
+            <param name="name">The attribute name.</param>
+            <param name="value">The attribute value.</param>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.WriteBeginTag(System.String)">
+            <summary>
+            Writes a begin tag.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.HtmlTextWriterWrapper.Write(System.Char)">
+            <summary>
+            Writes the specified char to the stream.
+            </summary>
+            <param name="c">The char to write.</param>
+        </member>
+        <member name="T:HtmlBuilder.TextElement">
+            <summary>
+            Represents a special element used for literal text.  Using this element
+            allows the use of strings to act as Elements.  So "Hello World" can become
+            an <see cref="T:HtmlBuilder.Element"></see> simply by wrapping it in a TextElement like
+            this: new TextElement("Hello World")
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.TextElement.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HtmlBuilder.TextElement"/> class.
+            </summary>
+            <param name="text">The text.</param>
+        </member>
+        <member name="M:HtmlBuilder.TextElement.Render(HtmlBuilder.IWriter)">
+            <summary>
+            Renders this element to the html writer.
+            </summary>
+            <param name="writer">The html writer this element and it's children are rendered.</param>
+            <example>
+            string expected = @"<span>Hello World</span>";
+            string actual = "";
+            using (StringWriter writer = new StringWriter())
+            using (HtmlTextWriter html = new HtmlTextWriter(writer))
+            {
+            new Element("span")
+            .Update("Hello World")
+            .Render(html);
+            actual = writer.ToString();
+            }
+            Assert.AreEqual(expected, actual);
+            </example>
+        </member>
+        <member name="P:HtmlBuilder.TextElement.Text">
+            <summary>
+            Gets the text.
+            </summary>
+            <value>The text.</value>
+        </member>
+        <member name="T:HtmlBuilder.XmlWriterWrapper">
+            <summary>
+            Wraps an XmlWriter so that it conforms to the IWriter interface.
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.#ctor(System.Xml.XmlWriter)">
+            <summary>
+            Initializes a new instance of the XmlWriterWrapper class.
+            </summary>
+            <param name="xml"></param>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.CloseTag">
+            <summary>
+            Closes the tag.  This does nothing for the <see cref="T:HtmlBuilder.XmlWriterWrapper"/>
+            </summary>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.Write(System.String)">
+            <summary>
+            Writes the specified string to the underlying <see cref="T:System.Xml.XmlTextWriter"/>, calls the WriteRaw method.
+            </summary>
+            <param name="s">The string to write.</param>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.WriteBeginTag(System.String)">
+            <summary>
+            Writes the begin tag.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.WriteEndTag(System.String)">
+            <summary>
+            Writes the end tag.
+            </summary>
+            <param name="tagName">Name of the tag.</param>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.WriteAttribute(System.String,System.String)">
+            <summary>
+            Writes the attribute.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:HtmlBuilder.XmlWriterWrapper.Write(System.Char)">
+            <summary>
+            Writes the specified c.  Calls WriteRaw on the underlying <see cref="T:System.Xml.XmlTextWriter"/>
+            </summary>
+            <param name="c">The c.</param>
+        </member>
+    </members>
+</doc>
