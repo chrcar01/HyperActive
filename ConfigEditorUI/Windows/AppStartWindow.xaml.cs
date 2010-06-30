@@ -4,6 +4,8 @@ using ConfigEditorUI.Services;
 using ConfigEditorUI.Controls;
 using HyperActive.Core.Config;
 using ConfigEditorUI.Models;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace ConfigEditorUI.Windows
 {
@@ -47,22 +49,7 @@ namespace ConfigEditorUI.Windows
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			
-			var service = new ConfigService();
-			EditConfigsViewModel model = DataContext as EditConfigsViewModel;
-			if (String.IsNullOrEmpty(model.ConfigFilePath))
-			{
-				var dlg = new System.Windows.Forms.SaveFileDialog();
-				dlg.FileName = "hyperactive.config";
-				dlg.CheckFileExists = false;
-				dlg.Title = "Select HyperActive Configuration File";
-				dlg.DefaultExt = ".config";
-				dlg.Filter = "HyperActive Config Files | *.config";
-				if (System.Windows.Forms.DialogResult.OK == dlg.ShowDialog())
-				{
-					model.ConfigFilePath = dlg.FileName;
-				}
-			}
-			service.Save(model);
+			
 		}
 
 		private void FileOpenConfigMenuItem_Click(object sender, RoutedEventArgs e)
@@ -93,5 +80,45 @@ namespace ConfigEditorUI.Windows
 			DataContext = model;
 			EditConfig(model.Configs[0]);
 		}
+
+		private void FileSaveConfigMenuItem_Click(object sender, RoutedEventArgs e)
+		{
+			var service = new ConfigService();
+			EditConfigsViewModel model = DataContext as EditConfigsViewModel;
+			if (String.IsNullOrEmpty(model.ConfigFilePath))
+			{
+				var dlg = new System.Windows.Forms.SaveFileDialog();
+				dlg.FileName = "hyperactive.config";
+				dlg.CheckFileExists = false;
+				dlg.Title = "Select HyperActive Configuration File";
+				dlg.DefaultExt = ".config";
+				dlg.Filter = "HyperActive Config Files | *.config";
+				if (System.Windows.Forms.DialogResult.OK == dlg.ShowDialog())
+				{
+					model.ConfigFilePath = dlg.FileName;
+				}
+			}
+			service.Save(model);
+			Status("Saved " + model.ConfigFilePath + " at " + DateTime.Now.ToString("MMM d, yyyy hh:mm:ss"));
+		}
+		private void Status(string message)
+		{
+			StatusLabel.Content = message;
+		}
+		private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			bool anyControlKeyPressed = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
+			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.S))
+				FileSaveConfigMenuItem_Click(this, e);
+
+			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.O))
+				FileOpenConfigMenuItem_Click(this, e);
+
+			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.N))
+				FileCreateConfigMenuItem_Click(this, e);
+			e.Handled = true;
+		}
+
+	
 	}
 }

@@ -88,8 +88,8 @@
 				<Label Grid.Column="0" Grid.Row="0">Use Microsoft's Header</Label>
 				<Label Grid.Column="0" Grid.Row="1">Verbose IOC Logging</Label>
 				
-				<CheckBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsChecked="{Binding Path=UseMicrosoftsHeader, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></CheckBox>
-				<CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding Path=IocVerboseLogging, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"></CheckBox>
+				<CheckBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsChecked="{Binding Path=UseMicrosoftsHeader, Mode=TwoWay}"></CheckBox>
+				<CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding Path=IocVerboseLogging, Mode=TwoWay}"></CheckBox>
 				
 			</Grid>
 			

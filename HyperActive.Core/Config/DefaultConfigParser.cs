@@ -64,7 +64,7 @@ namespace HyperActive.Core.Config
 				config.AppendChild(CreateAddNode(doc, "iocverboselogging", cfg.IocVerboseLogging.ToString().ToLower()));
 				config.AppendChild(CreateAddNode(doc, "generatecolumnlist", cfg.GenerateColumnList.ToString().ToLower()));
 				config.AppendChild(CreateAddNode(doc, "generatecomments", cfg.GenerateComments.ToString().ToLower()));
-				config.AppendChild(CreateAddNode(doc, "usemicrosoftheader", cfg.UseMicrosoftsHeader.ToString().ToLower()));
+				config.AppendChild(CreateAddNode(doc, "usemicrosoftsheader", cfg.UseMicrosoftsHeader.ToString().ToLower()));
 				config.AppendChild(CreateAddNode(doc, "namespace", cfg.Namespace));
 				config.AppendChild(CreateAddNode(doc, "outputpath", cfg.OutputPath));
 				config.AppendChild(CreateAddNode(doc, "enumoutputpath", cfg.EnumOutputPath));

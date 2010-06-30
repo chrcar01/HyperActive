@@ -102,6 +102,7 @@ namespace ConfigEditorUI.Services
 		public EditConfigsViewModel EditConfigs(string configFilePath)
 		{
 			var result = new EditConfigsViewModel();
+			result.ConfigFilePath = configFilePath;
 			var configParser = new DefaultConfigParser();
 			var options = configParser.ParseXml(File.ReadAllText(configFilePath));
 			var models = Convert(options);
