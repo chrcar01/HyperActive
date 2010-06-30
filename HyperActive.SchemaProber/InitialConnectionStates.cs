@@ -3,16 +3,16 @@ using System;
 namespace HyperActive.SchemaProber
 {
 	/// <summary>
-	/// Initial states of a database connection.
+	/// The state of a connection.
 	/// </summary>
 	public enum InitialConnectionStates
 	{
 		/// <summary>
-		/// Connection should be opened.
+		/// The connection is open.
 		/// </summary>
 		Open,
 		/// <summary>
-		/// Connection should be closed.
+		/// The connection is closed.
 		/// </summary>
 		Closed
 	}

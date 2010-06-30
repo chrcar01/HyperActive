@@ -1,0 +1,68 @@
+﻿<Window x:Class="ConfigEditorUI.Windows.ProjectWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		WindowStartupLocation="CenterOwner"
+		ResizeMode="NoResize"
+    Title="HyperActive Project" Height="466" Width="477">	
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<RadioButton x:Name="NewProjectRadioButton" Click="NewProjectRadioButton_Click" Grid.Row="0" IsChecked="{Binding Path=IsNewProject,Mode=TwoWay}">
+			<Label>New Project</Label>
+		</RadioButton>
+		<Border Grid.Row="1" Margin="10" BorderBrush="Silver" BorderThickness="0 0 0 1">
+			<Grid Margin="0 0 0 20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MinWidth="100" MaxWidth="200"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Label Grid.Column="0" Grid.Row="0">Server</Label>
+				<Label Grid.Column="0" Grid.Row="1">Authentication</Label>
+				<Label Margin="20 0 0 0" Grid.Column="0" Grid.Row="2">User name</Label>
+				<Label Margin="20 0 0 0" Grid.Column="0" Grid.Row="3">Password</Label>
+				<Label Grid.Column="0" Grid.Row="4">Database</Label>
+
+				<TextBox x:Name="ServerTextBox" IsEnabled="{Binding Path=IsNewProject}" Text="{Binding Path=Server,Mode=TwoWay}" HorizontalAlignment="Left" Height="25" Margin="3" Width="200" Grid.Column="1" Grid.Row="0"></TextBox>
+				<ComboBox x:Name="AuthenticationComboBox" SelectionChanged="AuthenticationComboBox_SelectionChanged" IsEnabled="{Binding Path=IsNewProject}" Margin="3" Height="25"  Grid.Column="1" Grid.Row="1"></ComboBox>
+				<TextBox x:Name="UsernameTextBox" IsEnabled="{Binding Path=CanEnterUsername}" HorizontalAlignment="Left" Height="25" Margin="20 3 3 3" Width="150" Grid.Column="1" Grid.Row="2"></TextBox>
+				<PasswordBox IsEnabled="{Binding Path=CanEnterUsername}" HorizontalAlignment="Left" Height="25" Margin="20 3 3 3" Width="150" Grid.Column="1" Grid.Row="3"></PasswordBox>
+				<ComboBox SelectedValue="{Binding Path=Database,Mode=TwoWay}" x:Name="DatabasesComboBox" DropDownOpened="DatabasesComboBox_DropDownOpened" IsEnabled="{Binding Path=IsNewProject}" SelectionChanged="DatabasesComboBox_SelectionChanged" Height="25" Grid.Column="1" Grid.Row="4"></ComboBox>
+			</Grid>
+		</Border>
+		<RadioButton x:Name="ExistingProjectRadioButton" Click="ExistingProjectRadioButton_Click" Grid.Row="2" IsChecked="{Binding Path=IsExistingProject,Mode=TwoWay}">
+			<Label>Existing Project</Label>
+		</RadioButton>
+		<Border BorderBrush="Silver" BorderThickness="0 0 0 1" Grid.Row="3" Margin="10">
+			<Grid Margin="0 0 0 20">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="60"></ColumnDefinition>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="120" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<Label Grid.Row="0" Grid.Column="0">File</Label>
+				<TextBox IsEnabled="{Binding Path=IsExistingProject}" Text="{Binding Path=ConfigFilePath,Mode=TwoWay}" x:Name="ConfigFileTextBox" TextChanged="ConfigFileTextBox_TextChanged" Height="25" Margin="3" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"></TextBox>
+				
+				<Button x:Name="BrowseForConfigFileButton" Click="BrowseForConfigFileButton_Click" Margin="3" IsEnabled="{Binding Path=IsExistingProject}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="100" Height="30">Browse ...</Button>
+			</Grid>
+			
+		</Border>
+		<Button x:Name="StartButton" Click="StartButton_Click" IsEnabled="{Binding Path=StartButtonEnabled}" Grid.Row="6" HorizontalAlignment="Right" Width="100" Height="30" Margin="3">Create</Button>
+	</Grid>
+</Window>

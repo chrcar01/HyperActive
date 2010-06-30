@@ -1,12 +1,28 @@
+using HyperActive.Core.Config;
 using HyperActive.Core.Generators;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace HyperActive.Core.Config
+namespace ConfigEditorUI.Models
 {
-	public class DefaultConfigurationOptions : IConfigurationOptions, INotifyPropertyChanged
+	public class ConfigurationOptionsViewModel : INotifyPropertyChanged
 	{
+		private string _generatorTypeName;
+		public string GeneratorTypeName
+		{
+			get
+			{
+				return _generatorTypeName;
+			}
+			set
+			{
+				_generatorTypeName = value;
+				RaisePropertyChanged("GeneratorTypeName");
+			}
+		}
+        
 		private bool _iocVerboseLogging;
 		/// <summary>
 		/// Gets or sets a value indicating whether [ioc verbose logging].
@@ -86,47 +102,37 @@ namespace HyperActive.Core.Config
 			}
 		}
 
-		private IEnumerable<EnumDescriptor> _enums;
+		private ObservableCollection<EnumDescriptor> _enums;
 		/// <summary>
 		/// Gets or sets the enums.
 		/// </summary>
 		/// <value>The enums.</value>
-		public IEnumerable<EnumDescriptor> Enums
+		public ObservableCollection<EnumDescriptor> Enums
 		{
 			get
 			{
 				if (_enums == null)
 				{
-					_enums = new List<EnumDescriptor>();
+					_enums = new ObservableCollection<EnumDescriptor>();
 				}
 				return _enums;
 			}
-			set
-			{
-				_enums = value;
-				RaisePropertyChanged("Enums");
-			}
 		}
 
-		private IEnumerable<ComponentDescriptor> _components;
+		private ObservableCollection<ComponentDescriptor> _components;
 		/// <summary>
 		/// Gets or sets the components.
 		/// </summary>
 		/// <value>The components.</value>
-		public IEnumerable<ComponentDescriptor> Components
+		public ObservableCollection<ComponentDescriptor> Components
 		{
 			get
 			{
 				if (_components == null)
 				{
-					_components = new List<ComponentDescriptor>();
+					_components = new ObservableCollection<ComponentDescriptor>();
 				}
 				return _components;
-			}
-			set
-			{
-				_components = value;
-				RaisePropertyChanged("Components");
 			}
 		}
 
@@ -428,4 +434,5 @@ namespace HyperActive.Core.Config
 
 		#endregion
 	}
+	
 }

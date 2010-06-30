@@ -167,6 +167,17 @@ namespace HyperActive.Dominator
 
 			foreach (AttributeDeclaration attr in this.Attributes)
 			{
+				bool skip = false;
+				foreach (CodeAttributeDeclaration customAttrib in prop.CustomAttributes)
+				{
+					if (customAttrib.Name == attr.TypeReference.ToString())
+					{
+						skip = true;
+						break;
+					}
+				}
+				if (skip) continue;
+
 				prop.CustomAttributes.Add(attr.ToCodeDom());
 			}
 			prop.Name = this.Name;

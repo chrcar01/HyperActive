@@ -38,6 +38,106 @@ namespace HyperActive.Core.Config
 
 			}
 		}
+		private XmlElement CreateAddNode(XmlDocument doc, string key, string value)
+		{
+			XmlElement result = doc.CreateElement("add");
+			XmlAttribute nameAttribute = doc.CreateAttribute("key");
+			nameAttribute.Value = key;
+			result.Attributes.Append(nameAttribute);
+			XmlAttribute valueAttribute = doc.CreateAttribute("value");
+			valueAttribute.Value = value;
+			result.Attributes.Append(valueAttribute);
+			return result;
+		}
+		public void WriteXml(string configFilePath, IEnumerable<IConfigurationOptions> configs)
+		{
+			XmlDocument doc = new XmlDocument();
+			XmlElement hyperactiveNode = doc.CreateElement("hyperactive");
+			foreach (var cfg in configs)
+			{
+				XmlElement config = doc.CreateElement("config");
+				config.AppendChild(CreateAddNode(doc, "abstractbasename", cfg.AbstractBaseName));
+				config.AppendChild(CreateAddNode(doc, "assemblydirectory", cfg.AssemblyDirectory));
+				config.AppendChild(CreateAddNode(doc, "basetypename", cfg.BaseTypeName));
+				config.AppendChild(CreateAddNode(doc, "connectionstring", cfg.ConnectionString));
+				config.AppendChild(CreateAddNode(doc, "datanamespace", cfg.DataNamespace));
+				config.AppendChild(CreateAddNode(doc, "iocverboselogging", cfg.IocVerboseLogging.ToString().ToLower()));
+				config.AppendChild(CreateAddNode(doc, "generatecolumnlist", cfg.GenerateColumnList.ToString().ToLower()));
+				config.AppendChild(CreateAddNode(doc, "generatecomments", cfg.GenerateComments.ToString().ToLower()));
+				config.AppendChild(CreateAddNode(doc, "usemicrosoftheader", cfg.UseMicrosoftsHeader.ToString().ToLower()));
+				config.AppendChild(CreateAddNode(doc, "namespace", cfg.Namespace));
+				config.AppendChild(CreateAddNode(doc, "outputpath", cfg.OutputPath));
+				config.AppendChild(CreateAddNode(doc, "enumoutputpath", cfg.EnumOutputPath));
+				config.AppendChild(CreateAddNode(doc, "enumnamespace", cfg.EnumNamespace));
+				config.AppendChild(CreateAddNode(doc, "staticprimarykeyname", cfg.StaticPrimaryKeyName));
+				config.AppendChild(CreateAddNode(doc, "onlytableswithprefix", String.Join(",", cfg.OnlyTablesWithPrefix.ToArray())));
+				config.AppendChild(CreateAddNode(doc, "skiptableswithprefix", String.Join(",", cfg.SkipTablesWithPrefix.ToArray())));
+				config.AppendChild(CreateAddNode(doc, "skiptables", String.Join(",", cfg.SkipTables.ToArray())));
+				var components = doc.CreateElement("components");
+				foreach (var c in cfg.Components)
+				{
+					var component = doc.CreateElement("component");
+					var serviceAttribute = doc.CreateAttribute("service");
+					serviceAttribute.Value = c.ServiceTypeName;
+					component.Attributes.Append(serviceAttribute);
+					var serviceImplAttribute = doc.CreateAttribute("serviceimpl");
+					serviceImplAttribute.Value = c.ServiceImplementationTypeName;
+					component.Attributes.Append(serviceImplAttribute);
+					if (c.Parameters.Count > 0)
+					{
+						foreach (var p in c.Parameters)
+						{
+							var paramNode = doc.CreateElement("param");
+							var nameAttr = doc.CreateAttribute("name");
+							nameAttr.Value = p.Name;
+							paramNode.Attributes.Append(nameAttr);
+							var valueAttr = doc.CreateAttribute("value");
+							valueAttr.Value = p.Value;
+							paramNode.Attributes.Append(valueAttr);
+							var typeAttr = doc.CreateAttribute("type");
+							typeAttr.Value = p.Type;
+							paramNode.Attributes.Append(typeAttr);
+							component.AppendChild(paramNode);
+						}
+					}
+					components.AppendChild(component);
+				}
+				config.AppendChild(components);
+				var enumsNode = doc.CreateElement("enums");
+				foreach (var e in cfg.Enums)
+				{
+					var enumNode = doc.CreateElement("add");
+					var tableAttr = doc.CreateAttribute("table");
+					tableAttr.Value = e.TableName;
+					enumNode.Attributes.Append(tableAttr);
+					var nameFieldAttr = doc.CreateAttribute("nameField");
+					nameFieldAttr.Value = e.NameField;
+					enumNode.Attributes.Append(nameFieldAttr);
+					var valueFieldAttr = doc.CreateAttribute("valueField");
+					valueFieldAttr.Value = e.ValueField;
+					enumNode.Attributes.Append(valueFieldAttr);
+					enumsNode.AppendChild(enumNode);
+				}
+				foreach (var r in cfg.EnumReplacements)
+				{
+					var replacementNode = doc.CreateElement("replacement");
+					var lookforAttr = doc.CreateAttribute("lookfor");
+					lookforAttr.Value = r.Key;
+					replacementNode.Attributes.Append(lookforAttr);
+					var replacewithAttr = doc.CreateAttribute("replacewith");
+					replacewithAttr.Value = r.Value;
+					replacementNode.Attributes.Append(replacewithAttr);
+					enumsNode.AppendChild(replacementNode);
+				}
+				hyperactiveNode.AppendChild(enumsNode);
+				config.AppendChild(enumsNode);
+
+				hyperactiveNode.AppendChild(config);
+			}
+			doc.AppendChild(hyperactiveNode);
+			doc.Save(configFilePath);
+		}
+		
 		public IEnumerable<IConfigurationOptions> ParseXml(string contentsOfConfigFile)
 		{
 			XmlDocument doc = new XmlDocument();

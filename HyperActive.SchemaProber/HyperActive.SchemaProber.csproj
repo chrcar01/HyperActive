@@ -25,7 +25,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\HyperActive.SchemaProber.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,22 +52,27 @@
     <Compile Include="ColumnSchema.cs" />
     <Compile Include="ColumnSchemaList.cs" />
     <Compile Include="DatabaseSchema.cs" />
-    <Compile Include="DbHelper.cs" />
+    <Compile Include="DbUtility.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="ForeignKeyColumnSchema.cs" />
     <Compile Include="ForeignKeyColumnSchemaList.cs" />
     <Compile Include="IColumnSchema.cs" />
     <Compile Include="IDbHelper.cs" />
+    <Compile Include="IDbHelperMap.cs" />
+    <Compile Include="IDbHelperTuple.cs" />
     <Compile Include="IDbProvider.cs" />
     <Compile Include="IForeignKeyColumnSchema.cs" />
     <Compile Include="InitialConnectionStates.cs" />
     <Compile Include="PrimaryKeyColumnSchema.cs" />
     <Compile Include="SchemaProberException.cs" />
-    <Compile Include="SqlCeDbHelper.cs" />
-    <Compile Include="SqlServerCeProvider.cs" />
+    <Compile Include="DbHelper.cs" />
     <Compile Include="SqlServerProvider.cs" />
+    <Compile Include="SystemDataExtensions.cs" />
     <Compile Include="TableSchema.cs" />
     <Compile Include="TableSchemaList.cs" />
+    <Compile Include="Tuple`1.cs" />
+    <Compile Include="Tuple`2.cs" />
+    <Compile Include="Tuple`3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

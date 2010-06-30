@@ -119,6 +119,7 @@ namespace HyperActive.Core.Generators
 			string typeParam = this.NameProvider.GetClassName(foreignkey.Table);
 			CodeDomTypeReference genericList = new CodeDomTypeReference("System.Collections.Generic.List").AddTypeParameters(typeParam);
 			PropertyDeclaration result = classDecl.AddProperty(propertyName, fieldName, "System.Collections.Generic.IList");
+			
 			result.AddTypeParameter(typeParam)
 				.AddAttribute("Castle.ActiveRecord.HasManyAttribute")
 				.AddArgument("typeof(" + this.NameProvider.GetClassName(foreignkey.Table) + ")")

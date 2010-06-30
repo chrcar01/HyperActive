@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		hyperactive.config = hyperactive.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyperActive.ConfigEditor", "HyperActive.ConfigEditor\HyperActive.ConfigEditor.csproj", "{90A272E3-9E64-4301-B95C-C951DF17A067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigEditorUI", "ConfigEditorUI\ConfigEditorUI.csproj", "{845AA056-D899-4B49-96EE-4DF4A3900A33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +62,10 @@ Global
 		{2887B291-E9B3-4132-9D02-00F7F96C3581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2887B291-E9B3-4132-9D02-00F7F96C3581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2887B291-E9B3-4132-9D02-00F7F96C3581}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90A272E3-9E64-4301-B95C-C951DF17A067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90A272E3-9E64-4301-B95C-C951DF17A067}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90A272E3-9E64-4301-B95C-C951DF17A067}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90A272E3-9E64-4301-B95C-C951DF17A067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845AA056-D899-4B49-96EE-4DF4A3900A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845AA056-D899-4B49-96EE-4DF4A3900A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845AA056-D899-4B49-96EE-4DF4A3900A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845AA056-D899-4B49-96EE-4DF4A3900A33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
