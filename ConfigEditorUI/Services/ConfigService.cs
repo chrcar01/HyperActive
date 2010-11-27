@@ -86,13 +86,13 @@ namespace ConfigEditorUI.Services
 				return EditConfigs(project.ConfigFilePath);
 
 			SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-			builder.DataSource = project.Server;
-			builder.InitialCatalog = project.Database;
-			builder.IntegratedSecurity = !project.IsSqlServerSecurity;
-			if (project.IsSqlServerSecurity)
+			builder.DataSource = project.SqlConnection.Server;
+			builder.InitialCatalog = project.SqlConnection.Database;
+			builder.IntegratedSecurity = !project.SqlConnection.IsSqlServerSecurity;
+			if (project.SqlConnection.IsSqlServerSecurity)
 			{
-				builder.UserID = project.Username;
-				builder.Password = project.Password;
+				builder.UserID = project.SqlConnection.Username;
+				builder.Password = project.SqlConnection.Password;
 			}
 
 			EditConfigsViewModel result = CreateConfig();

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows;
-using ConfigEditorUI.Services;
-using ConfigEditorUI.Controls;
-using HyperActive.Core.Config;
+﻿using ConfigEditorUI.Controls;
 using ConfigEditorUI.Models;
-using System.Diagnostics;
+using ConfigEditorUI.Services;
+using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ConfigEditorUI.Windows
@@ -29,29 +27,11 @@ namespace ConfigEditorUI.Windows
 					var service = new ConfigService();
 					EditConfigsViewModel model = service.EditConfigs(projectWin.Model);
 					DataContext = model;
+					ConfigsListBox.SelectedIndex = 0;
 				}
 			}
 		}
-
-		private void ListBox_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			EditConfig(ConfigsListBox.SelectedItem as ConfigurationOptionsViewModel);
-		}
-
-		private void EditConfig(ConfigurationOptionsViewModel config)
-		{
-			ControlContainer.Children.Clear();
-			var ctl = new EditConfigControl(config);
-			ctl.Height = ControlContainer.Height;
-			ctl.Width = ControlContainer.Width;
-			ControlContainer.Children.Add(ctl);
-		}
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
-			
-			
-		}
-
+	
 		private void FileOpenConfigMenuItem_Click(object sender, RoutedEventArgs e)
 		{
 			var dlg = new System.Windows.Forms.OpenFileDialog();
@@ -59,12 +39,13 @@ namespace ConfigEditorUI.Windows
 			dlg.DefaultExt = ".config";
 			dlg.Filter = "HyperActive Confg Files | *.config";
 			dlg.Title = "Select HyperActive Configuration File";
-			
+
 			if (System.Windows.Forms.DialogResult.OK != dlg.ShowDialog()) return;
 			var service = new ConfigService();
 			string configFilePath = dlg.FileName;
-			DataContext = service.EditConfigs(configFilePath);
-			ControlContainer.Children.Clear();
+			var model = service.EditConfigs(configFilePath);
+			DataContext = model;
+			//EditConfig(model.Configs[0]);
 		}
 
 		private void FileExitMenuItem_Click(object sender, RoutedEventArgs e)
@@ -78,7 +59,7 @@ namespace ConfigEditorUI.Windows
 			var service = new ConfigService();
 			var model = service.CreateConfig();
 			DataContext = model;
-			EditConfig(model.Configs[0]);
+			//EditConfig(model.Configs[0]);
 		}
 
 		private void FileSaveConfigMenuItem_Click(object sender, RoutedEventArgs e)
@@ -92,7 +73,7 @@ namespace ConfigEditorUI.Windows
 				dlg.CheckFileExists = false;
 				dlg.Title = "Select HyperActive Configuration File";
 				dlg.DefaultExt = ".config";
-				dlg.Filter = "HyperActive Config Files | *.config";
+				dlg.Filter = "Config Files | *.config";
 				if (System.Windows.Forms.DialogResult.OK == dlg.ShowDialog())
 				{
 					model.ConfigFilePath = dlg.FileName;
@@ -105,18 +86,32 @@ namespace ConfigEditorUI.Windows
 		{
 			StatusLabel.Content = message;
 		}
-		private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+		
+
+		private void FileSaveAsConfigMenuitem_Click(object sender, RoutedEventArgs e)
 		{
-			bool anyControlKeyPressed = Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
-			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.S))
-				FileSaveConfigMenuItem_Click(this, e);
+			var dlg = new System.Windows.Forms.OpenFileDialog();
+			dlg.Filter = "Config Files(*.config) | *.config";
+			dlg.FileName = "hyperactive.config";
+			dlg.DefaultExt = "*.config";
+			dlg.CheckFileExists = false;
+			dlg.Title = "Select HyperActive Config File";
+			var model = DataContext as EditConfigsViewModel;
+			if (System.Windows.Forms.DialogResult.OK == dlg.ShowDialog())
+			{
+				model.ConfigFilePath = dlg.FileName;
+			}
+			var service = new ConfigService();
+			service.Save(model);
+			Status("Saved " + model.ConfigFilePath + " at " + DateTime.Now.ToString("MMM d, yyyy hh:mm:ss"));
+		}
 
-			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.O))
-				FileOpenConfigMenuItem_Click(this, e);
-
-			if (anyControlKeyPressed && Keyboard.IsKeyDown(Key.N))
-				FileCreateConfigMenuItem_Click(this, e);
-			e.Handled = true;
+		private void AddButton_Click(object sender, RoutedEventArgs e)
+		{
+			var model = DataContext as EditConfigsViewModel;
+			var newConfig = new ConfigurationOptionsViewModel();
+			model.Configs.Add(newConfig);
+			
 		}
 
 	

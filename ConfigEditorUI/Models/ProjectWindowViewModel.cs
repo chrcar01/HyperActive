@@ -5,20 +5,23 @@ namespace ConfigEditorUI.Models
 {
 	public class ProjectWindowViewModel : INotifyPropertyChanged
 	{
-		private string _database;
-		public string Database
+
+		private EditSqlConnectionViewModel _sqlConnection;
+		public EditSqlConnectionViewModel SqlConnection
 		{
 			get
 			{
-				return _database;
+				if (_sqlConnection == null)
+				{
+					_sqlConnection = new EditSqlConnectionViewModel();
+				}
+				return _sqlConnection;
 			}
 			set
 			{
-				_database = value;
-				RaisePropertyChanged("Database");
+				_sqlConnection = value;
 			}
 		}
-
 		private bool _startButtonEnabled;
 		public bool StartButtonEnabled
 		{
@@ -32,46 +35,8 @@ namespace ConfigEditorUI.Models
 				RaisePropertyChanged("StartButtonEnabled");
 			}
 		}
-        
-		private bool _isIntegratedSecurity;
-		public bool IsIntegratedSecurity
-		{
-			get
-			{
-				return _isIntegratedSecurity;
-			}
-			set
-			{
-				_isIntegratedSecurity = value;
-				RaisePropertyChanged("IsIntegratedSecurity");
-			}
-		}
-		private bool _isSqlServerSecurity;
-		public bool IsSqlServerSecurity
-		{
-			get
-			{
-				return _isSqlServerSecurity;
-			}
-			set
-			{
-				_isSqlServerSecurity = value;
-				RaisePropertyChanged("IsSqlServerSecurity");
-			}
-		}
-		private bool _canEnterUsername;
-		public bool CanEnterUsername
-		{
-			get
-			{
-				return _canEnterUsername;
-			}
-			set
-			{
-				_canEnterUsername = value;
-				RaisePropertyChanged("CanEnterUsername");
-			}
-		}
+
+		
         
 		private bool _isNewProject = true;
 		public bool IsNewProject
@@ -103,45 +68,7 @@ namespace ConfigEditorUI.Models
 				RaisePropertyChanged("IsExistingProject");
 			}
 		}
-		private string _server;
-		public string Server
-		{
-			get
-			{
-				return _server;
-			}
-			set
-			{
-				_server = value;
-				RaisePropertyChanged("Server");
-			}
-		}
-		private string _username;
-		public string Username
-		{
-			get
-			{
-				return _username;
-			}
-			set
-			{
-				_username = value;
-				RaisePropertyChanged("Username");
-			}
-		}
-		private string _password;
-		public string Password
-		{
-			get
-			{
-				return _password;
-			}
-			set
-			{
-				_password = value;
-				RaisePropertyChanged("Password");
-			}
-		}
+		
 		private string _configFilePath;
 		public string ConfigFilePath
 		{

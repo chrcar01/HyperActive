@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using HyperActive.Core.Generators;
 
@@ -51,6 +52,12 @@ namespace HyperActive.Core.Config
 		}
 		public void WriteXml(string configFilePath, IEnumerable<IConfigurationOptions> configs)
 		{
+			if (String.IsNullOrEmpty(configFilePath))
+				throw new ArgumentException("configFilePath is null or empty.", "configFilePath");
+
+			if (configs == null || configs.Count() == 0)
+				throw new ArgumentNullException("configs", "configs is null.");
+
 			XmlDocument doc = new XmlDocument();
 			XmlElement hyperactiveNode = doc.CreateElement("hyperactive");
 			foreach (var cfg in configs)
@@ -137,9 +144,12 @@ namespace HyperActive.Core.Config
 			doc.AppendChild(hyperactiveNode);
 			doc.Save(configFilePath);
 		}
-		
+
 		public IEnumerable<IConfigurationOptions> ParseXml(string contentsOfConfigFile)
 		{
+			if (String.IsNullOrEmpty(contentsOfConfigFile))
+				throw new ArgumentException("contentsOfConfigFile is null or empty.", "contentsOfConfigFile");
+			
 			XmlDocument doc = new XmlDocument();
 			doc.LoadXml(contentsOfConfigFile);
 			XmlNodeList configNodes = doc.DocumentElement.SelectNodes("//config");
@@ -148,12 +158,12 @@ namespace HyperActive.Core.Config
 			{
 				IConfigurationOptions options = new DefaultConfigurationOptions();
 				var attrib = new AttributeHelper(".//add[@key='{0}']/@value", configNode);
-                options.AssemblyDirectory = attrib.Get("assemblydirectory");
+				options.AssemblyDirectory = attrib.Get("assemblydirectory");
 				options.AbstractBaseName = attrib.Get("abstractbasename");
 				options.BaseTypeName = attrib.Get("basetypename");
 				options.ConnectionString = attrib.Get("connectionstring");
 				options.DataNamespace = attrib.Get("datanamespace");
-                options.IocVerboseLogging = attrib.GetBool("iocverboselogging", false);
+				options.IocVerboseLogging = attrib.GetBool("iocverboselogging", false);
 				options.GenerateColumnList = attrib.GetBool("generatecolumnlist", true);
 				options.GenerateComments = attrib.GetBool("generatecomments", true);
 				options.UseMicrosoftsHeader = attrib.GetBool("usemicrosoftsheader", false);
@@ -164,7 +174,7 @@ namespace HyperActive.Core.Config
 				options.StaticPrimaryKeyName = attrib.Get("staticprimarykeyname");
 				options.OnlyTablesWithPrefix.AddRange(attrib.Get("onlytableswithprefix").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 				options.SkipTablesWithPrefix.AddRange(attrib.Get("skiptableswithprefix").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-                options.SkipTables.AddRange(attrib.Get("skiptables").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+				options.SkipTables.AddRange(attrib.Get("skiptables").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 				options.Enums = ParseEnums(configNode);
 				LoadEnumReplacements(configNode, options);
 				options.Components = ParseComponents(configNode);

@@ -18,7 +18,7 @@ namespace HyperActive.SchemaProber
 		{
 			get
 			{
-				return this.Find(delegate(TableSchema t) { return t.Name == tableName; });
+				return Find(t => t.Name.Equals(tableName, StringComparison.OrdinalIgnoreCase));
 			}
 		}
 	}

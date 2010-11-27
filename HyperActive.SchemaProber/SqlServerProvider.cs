@@ -24,9 +24,9 @@ namespace HyperActive.SchemaProber
 				return _id;
 			}
 			set
-            {
-            	_id = value;
-            }
+			{
+				_id = value;
+			}
 		}
 
 		/// <summary>
@@ -140,6 +140,7 @@ where c.table_name = @table_name
 				case "timestamp":
 				case "smalldatetime":
 				case "date":
+				case "datetime2":
 				case "datetime": return (typeof(DateTime));
 				case "money":
 				case "smallmoney":
@@ -232,7 +233,7 @@ and c.table_name = @table_name
 			{
 				cmd.Parameters.Add("@table_name", SqlDbType.NVarChar, 128).Value = table.Name;
 				using (IDataReader reader = this._helper.ExecuteReader(cmd))
-                {
+				{
 					if (reader.Read())
 					{
 						SqlDbType sqlType = Enum<SqlDbType>.Parse(reader["DATA_TYPE"].ToString());
@@ -246,7 +247,7 @@ and c.table_name = @table_name
 						props.Add("is_nullable", (reader["is_nullable"].ToString().Equals("YES")));
 						result = new PrimaryKeyColumnSchema(this, table, sqlType, dataType, name, length, props);
 					}
-                }
+				}
 				
 			}
 			return result;
@@ -283,7 +284,7 @@ where object_name (f.referenced_object_id) =  @table_name
 			{
 				cmd.Parameters.Add("@table_name", SqlDbType.NVarChar, 128).Value = primaryKey.Table.Name;
 				using (IDataReader reader = this._helper.ExecuteReader(cmd))
-                {
+				{
 					while (reader.Read())
 					{
 						string tableName = reader["TABLE_NAME"].ToString();
@@ -302,7 +303,7 @@ where object_name (f.referenced_object_id) =  @table_name
 						props.Add("is_nullable", (reader["is_nullable"].ToString().Equals("YES")));
 						result.Add(new ForeignKeyColumnSchema(this, new TableSchema(this, tableName), sqlType, dataType, name, length, props));
 					}
-                }
+				}
 			}
 			return result;
 		}

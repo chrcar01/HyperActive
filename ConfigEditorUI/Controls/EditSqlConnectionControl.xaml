@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="ConfigEditorUI.Controls.EditSqlConnectionControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100"></ColumnDefinition>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="Auto"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Label Grid.Column="0" Grid.Row="0">Server</Label>
+		<Label Grid.Column="0" Grid.Row="1">Authentication</Label>
+		<Label Margin="20 0 0 0" Grid.Column="0" Grid.Row="2">User name</Label>
+		<Label Margin="20 0 0 0" Grid.Column="0" Grid.Row="3">Password</Label>
+		<Label Grid.Column="0" Grid.Row="4">Database</Label>
+
+		<TextBox x:Name="ServerTextBox" IsEnabled="{Binding Path=IsNewProject}" Text="{Binding Path=Server,Mode=TwoWay}" HorizontalAlignment="Left" Height="25" Margin="3" Width="200" Grid.Column="1" Grid.Row="0"></TextBox>
+		<ComboBox x:Name="AuthenticationComboBox" SelectionChanged="AuthenticationComboBox_SelectionChanged" IsEnabled="{Binding Path=IsNewProject}" Margin="3" Height="25"  Grid.Column="1" Grid.Row="1"></ComboBox>
+		<TextBox Text="{Binding Path=Username}" x:Name="UsernameTextBox" IsEnabled="{Binding Path=CanEnterUsername}" HorizontalAlignment="Left" Height="25" Margin="20 3 3 3" Width="150" Grid.Column="1" Grid.Row="2"></TextBox>
+		<TextBox Text="{Binding Path=Password}" IsEnabled="{Binding Path=CanEnterUsername}" HorizontalAlignment="Left" Height="25" Margin="20 3 3 3" Width="150" Grid.Column="1" Grid.Row="3"></TextBox>
+		<ComboBox SelectedValue="{Binding Path=Database,Mode=TwoWay}" x:Name="DatabasesComboBox" SelectionChanged="DatabasesComboBox_SelectionChanged" DropDownOpened="DatabasesComboBox_DropDownOpened" IsEnabled="{Binding Path=IsNewProject}" Height="25" Grid.Column="1" Grid.Row="4"></ComboBox>
+	</Grid>
+
+</UserControl>

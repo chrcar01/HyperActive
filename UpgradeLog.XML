@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="HyperActive">
+</Property><Property Name="Solution File" Value="C:\source\git\HyperActive\HyperActive.sln">
+</Property><Property Name="Date" Value="Saturday, July 03, 2010">
+</Property><Property Name="Time" Value="10:37 AM">
+</Property></Properties><Event ErrorLevel="0" Project="HyperActive.Core" Source="HyperActive.Core\HyperActive.Core.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.Core" Source="HyperActive.Core\HyperActive.Core.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.ConsoleUI" Source="HyperActive.ConsoleUI\HyperActive.ConsoleUI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.ConsoleUI" Source="HyperActive.ConsoleUI\HyperActive.ConsoleUI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.Core.Tests" Source="HyperActive.Core.Tests\HyperActive.Core.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.Core.Tests" Source="HyperActive.Core.Tests\HyperActive.Core.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.Dominator" Source="HyperActive.Dominator\HyperActive.Dominator.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.Dominator" Source="HyperActive.Dominator\HyperActive.Dominator.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.Dominator.Tests" Source="HyperActive.Dominator.Tests\HyperActive.Dominator.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.Dominator.Tests" Source="HyperActive.Dominator.Tests\HyperActive.Dominator.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.SchemaProber" Source="HyperActive.SchemaProber\HyperActive.SchemaProber.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.SchemaProber" Source="HyperActive.SchemaProber\HyperActive.SchemaProber.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.SchemaProber.Tests" Source="HyperActive.SchemaProber.Tests\HyperActive.SchemaProber.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.SchemaProber.Tests" Source="HyperActive.SchemaProber.Tests\HyperActive.SchemaProber.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.ConsoleUI.Tests" Source="HyperActive.ConsoleUI.Tests\HyperActive.ConsoleUI.Tests.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="HyperActive.ConsoleUI.Tests" Source="HyperActive.ConsoleUI.Tests\HyperActive.ConsoleUI.Tests.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ConfigEditorUI" Source="ConfigEditorUI\ConfigEditorUI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ConfigEditorUI" Source="ConfigEditorUI\ConfigEditorUI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="HyperActive.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="HyperActive.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="HyperActive.Core" Source="HyperActive.Core\HyperActive.Core.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.ConsoleUI" Source="HyperActive.ConsoleUI\HyperActive.ConsoleUI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.Core.Tests" Source="HyperActive.Core.Tests\HyperActive.Core.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.Dominator" Source="HyperActive.Dominator\HyperActive.Dominator.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.Dominator.Tests" Source="HyperActive.Dominator.Tests\HyperActive.Dominator.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.SchemaProber" Source="HyperActive.SchemaProber\HyperActive.SchemaProber.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.SchemaProber.Tests" Source="HyperActive.SchemaProber.Tests\HyperActive.SchemaProber.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="HyperActive.ConsoleUI.Tests" Source="HyperActive.ConsoleUI.Tests\HyperActive.ConsoleUI.Tests.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ConfigEditorUI" Source="ConfigEditorUI\ConfigEditorUI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
